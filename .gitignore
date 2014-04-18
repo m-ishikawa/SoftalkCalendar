@@ -1,0 +1,5 @@
+*/bin
+*/obj
+packages/*
+!packages/repositories.config
+client_secrets - コピー.json
