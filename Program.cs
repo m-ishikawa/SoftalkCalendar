@@ -13,16 +13,12 @@ static class Program
 {
 	public static void Main()
 	{
-		// Display the header and initialize the sample.
-		Console.WriteLine("Google.Apis.Calendar.v3 Sample");
-		Console.WriteLine("==============================");
-
-
 		var main = new CalendarMain();
 		main.Run();
 
 		Console.WriteLine("Press any key to continue...");
 		Console.ReadKey();
+		main.Dispose();
 	}
 
 }

@@ -20,15 +20,18 @@ class CalendarMain
 	
 	public CalendarMain()
 	{
+		// アプリバージョンなど表示
 		System.Diagnostics.FileVersionInfo verInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
-		Console.WriteLine(verInfo.ProductName + " Ver" + verInfo.FileVersion + "\n " + verInfo.LegalCopyright);
+		Console.WriteLine(verInfo.ProductName + " Ver" + verInfo.FileVersion);
 
+		// 設定ファイルを読み込む
 		using (FileStream stream = new FileStream("settings.json", FileMode.Open, FileAccess.Read))
 		{
 			Settings = AppSettings.Load(stream).Settings;
 			Console.WriteLine("SoftalkPath=" + Settings.SoftalkPath);
 		}
 
+		// googleにサインインするための情報をファイルから読み込む
 		UserCredential credential = default(UserCredential);
 		using (FileStream stream = new FileStream("client_secrets.json", FileMode.Open, FileAccess.Read))
 		{
@@ -101,6 +104,10 @@ class CalendarMain
 
 	DateTime? lastFetchDate;
 
+	/// <summary>
+	/// 定期的にカレンダーを更新する
+	/// </summary>
+	/// <returns></returns>
 	public IEnumerable<GoogleCalendarAPI.CalendarData> FetchCalendars()
 	{
 		var now = DateTime.Now;
@@ -114,7 +121,7 @@ class CalendarMain
 			calendars = _googleCalendarAPI.Fetch();
 
 			// 取得したカレンダー表示
-			DisplayCalendarEvents(calendars);
+			//DisplayCalendarEvents(calendars);
 		}
 		return calendars;
 	}

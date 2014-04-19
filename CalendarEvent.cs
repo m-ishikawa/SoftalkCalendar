@@ -13,10 +13,12 @@ class CalendarEvent
 {
 	class EventData
 	{
-		public Event Event;
-		public bool Start;
-		public EventData(Event evt, bool start)
+		public CalendarListEntry CalendarListEntry { get; private set; }
+		public Event Event { get; private set; }
+		public bool Start { get; private set; }
+		public EventData(CalendarListEntry calendarListEntry, Event evt, bool start)
 		{
+			CalendarListEntry = calendarListEntry;
 			Event = evt;
 			Start = start;
 		}
@@ -32,6 +34,10 @@ class CalendarEvent
 	}
 
 
+	/// <summary>
+	/// カレンダーに設定されているイベントの開始時間と終了時間に喋らせる
+	/// </summary>
+	/// <param name="calendars"></param>
 	public void EventUpdate(IEnumerable<GoogleCalendarAPI.CalendarData> calendars)
 	{
 		var now = DateTime.Now;
@@ -61,7 +67,7 @@ class CalendarEvent
 					}
 					else
 					{
-						events.Add(new EventData(item, true));
+						events.Add(new EventData(cal.CalendarListEntry, item, true));
 					}
 				}
 
@@ -71,42 +77,32 @@ class CalendarEvent
 					dt = item.End.DateTime.Value;
 					if (dt > lastUpdateDate && dt <= now)
 					{
-						events.Add(new EventData(item, false));
+						events.Add(new EventData(cal.CalendarListEntry, item, false));
 					}
 				}
 			}
 		}
 		lastUpdateDate = now;
 
-		//var e = new Event();
-		//e.Summary = "放置メンテ";
-		//e.Start = new EventDateTime();
-		//e.Start.DateTime = DateTime.Now;
-		//e.End = new EventDateTime();
-		//e.End.DateTime = DateTime.Now.AddMinutes(10);
-		//events.Add(new EventData(e, true));
-		//e.Summary = "放置メンテ";
-		//e.Start = new EventDateTime();
-		//e.Start.DateTime = DateTime.Today;
-		//e.End = new EventDateTime();
-		//e.End.DateTime = DateTime.Today.AddHours(1);
-		//events.Add(new EventData(e, true));
-
-
 		message += SayEvents(events, now);
-
 
 		if (!string.IsNullOrEmpty(message))
 		{
 			Console.WriteLine("message=" + message);
 
+			// softalkを呼び出す
 			var softalk = _settings.SoftalkPath;
 			Process.Start(softalk, " /W:" + message);
 			//Process.Start(softalk, " /close");
 		}
 	}
 
-
+	/// <summary>
+	/// 指定の時間になった時のセリフ作成
+	/// </summary>
+	/// <param name="events">イベント</param>
+	/// <param name="now">セリフを言う時の時間</param>
+	/// <returns></returns>
 	string SayEvents(IEnumerable<EventData> events, DateTime now)
 	{
 		if (events == null || events.Count() == 0)
@@ -118,6 +114,8 @@ class CalendarEvent
 		foreach (var item in events)
 		{
 			var d = item.Event;
+
+			message += item.CalendarListEntry.Summary + "。";
 
 			if (item.Start)
 			{
@@ -156,6 +154,8 @@ class CalendarEvent
 		{
 			if (d.Events == null || d.Events.Count == 0)
 				continue;
+
+			message += d.CalendarListEntry.Summary + "。";
 
 			for (int i = 0; i < d.Events.Count; i++)
 			{
