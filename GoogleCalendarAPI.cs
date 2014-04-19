@@ -32,27 +32,37 @@ class GoogleCalendarAPI
 	}
 
 
+	/// <summary>
+	/// 今日のカレンダーを取得する
+	/// </summary>
+	/// <returns></returns>
 	public IEnumerable<CalendarData> Fetch()
 	{
 		// Fetch the list of calendar list
-		var items = _service.CalendarList.List().Execute().Items;
-		List<CalendarData> calList = new List<CalendarData>();
-
-		foreach (var item in items)
+		try
 		{
-			var requeust = _service.Events.List(item.Id);
-			// Set MaxResults and TimeMin with sample values
-			requeust.MaxResults = 100;
-			var timeSpan = new TimeSpan(4, 0, 0);	// 一日を朝４時始まりにする
-			requeust.TimeMin = DateTime.Today + timeSpan;
-			requeust.TimeMax = DateTime.Today.AddDays(1) + timeSpan;
-			// Fetch the list of events
-			var events = requeust.Execute().Items.ToArray();
+			var items = _service.CalendarList.List().Execute().Items;
+			List<CalendarData> calList = new List<CalendarData>();
 
-			calList.Add(new CalendarData(item, events));
+			foreach (var item in items)
+			{
+				var requeust = _service.Events.List(item.Id);
+				// Set MaxResults and TimeMin with sample values
+				requeust.MaxResults = 100;
+				var timeSpan = new TimeSpan(4, 0, 0);	// 一日を朝４時始まりにする
+				requeust.TimeMin = DateTime.Today + timeSpan;
+				requeust.TimeMax = DateTime.Today.AddDays(1) + timeSpan;
+				// Fetch the list of events
+				var events = requeust.Execute().Items.ToArray();
+
+				calList.Add(new CalendarData(item, events));
+			}
+			return calList;
 		}
-
-		return calList;
+		catch (Exception e)
+		{
+			return null;
+		}
 	}
 
 }

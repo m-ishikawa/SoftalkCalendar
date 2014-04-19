@@ -78,7 +78,9 @@ class CalendarMain
 				calendars = cal;
 			}
 
-			calEvt.EventUpdate(calendars);
+			// イベントの時刻をチェックしてしゃべるよ
+			if (calendars != null)
+				calEvt.EventUpdate(calendars);
 
 			Thread.Sleep(5 * 1000);		// ５秒でポーリング
 		}
