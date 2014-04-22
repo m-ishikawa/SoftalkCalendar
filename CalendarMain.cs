@@ -98,8 +98,6 @@ class CalendarMain
 		e.Start.DateTime = DateTime.Parse(Settings.MorningMeetingTime);
 		e.Id = null;	// 朝会識別用特殊ID
 
-		e.Start.DateTime = DateTime.Now.AddMinutes(5);
-
 		return new GoogleCalendarAPI.CalendarData(null, new []{e});
 	}
 
