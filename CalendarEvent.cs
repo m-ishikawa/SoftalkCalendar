@@ -152,7 +152,7 @@ class CalendarEvent
 
 		foreach (var d in calendars)
 		{
-			if (d.Events == null || d.Events.Count == 0)
+			if (d.CalendarListEntry == null || d.Events == null || d.Events.Count == 0)
 				continue;
 
 			message += d.CalendarListEntry.Summary + "。";
