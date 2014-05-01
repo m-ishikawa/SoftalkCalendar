@@ -8,11 +8,11 @@ Googleカレンダーに登録してあるイベントを、時間になった�
 
 使い方
 -
-+ [カレンダー](https://www.google.com/calendar/)にイベントを登録する
-+ [API Console](https://code.google.com/apis/console/)の APIs から Calendar API を ON にする
++ [カレンダー](https://www.google.com/calendar/) にイベントを登録する
++ [API Console](https://code.google.com/apis/console/) の APIs から Calendar API を ON にする
 + 同サイトの Consent screen から 自分のメールアドレスを設定する
 + 同様に credentials から Client ID と Client secret を取得し client_secrets.json ファイルを書き換える
-+ [SofTalk](http://www35.atwiki.jp/softalk/)をダウンロードし　`c:\softalk\SofTalk.exe` に解凍する 
++ [SofTalk](http://www35.atwiki.jp/softalk/) をダウンロードし　`c:\softalk\SofTalk.exe` に配置する 
 + アプリを起動
 
 設定ファイル
