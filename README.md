@@ -23,7 +23,7 @@ Googleカレンダーに登録してあるイベントを、時間になった�
 + `softalk_path`: SofTalk のインストール Path
 + `morning_meeting_time`: 朝会の時間
 + `morning_meeting_message`: 朝会開始時の一言
-+　`update_interval`: カレンダーの更新間隔
++ `update_interval`: カレンダーの更新間隔
 
 関連情報
 -
