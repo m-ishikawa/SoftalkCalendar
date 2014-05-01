@@ -49,9 +49,11 @@ class GoogleCalendarAPI
 				var requeust = _service.Events.List(item.Id);
 				// Set MaxResults and TimeMin with sample values
 				requeust.MaxResults = 100;
-				var timeSpan = new TimeSpan(4, 0, 0);	// 一日を朝４時始まりにする
-				requeust.TimeMin = DateTime.Today + timeSpan;
-				requeust.TimeMax = DateTime.Today.AddDays(1) + timeSpan;
+				var timeSpan = new TimeSpan(0, 0, 0);	// 一日を朝４時始まりにする
+				var tody = new DateTime(DateTime.Today.Ticks, DateTimeKind.Utc);	// UTCに変更しないとズレる
+				requeust.TimeMin = tody + timeSpan;
+				requeust.TimeMax = tody.AddDays(1) + timeSpan;
+
 				// Fetch the list of events
 				var events = requeust.Execute().Items.ToArray();
 
