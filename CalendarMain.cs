@@ -121,7 +121,8 @@ class CalendarMain
 			calendars = _googleCalendarAPI.Fetch();
 
 			// 取得したカレンダー表示
-			//DisplayCalendarEvents(calendars);
+			//if (calendars != null)
+			//	DisplayCalendarEvents(calendars);
 		}
 		return calendars;
 	}
