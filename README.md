@@ -15,6 +15,8 @@ Googleカレンダーに登録してあるイベントを、時間になった�
 + [SofTalk](http://www35.atwiki.jp/softalk/) をダウンロードし　`c:\softalk\SofTalk.exe` に配置する 
 + アプリを起動
 
+詳しくは Wiki に書く予定。
+
 設定ファイル
 -
 実行時に、カレントに有る settings.json ファイルを読み込みます。  
