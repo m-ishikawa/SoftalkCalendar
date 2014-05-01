@@ -113,7 +113,7 @@ class CalendarMain
 		var now = DateTime.Now;
 		IEnumerable<GoogleCalendarAPI.CalendarData> calendars = null;
 
-		var span = new TimeSpan(0, 5, 0);	// カレンダーの更新間隔（10分）
+		var span = TimeSpan.Parse(Settings.UpdateInterval);	// カレンダーの更新間隔
 		if (!lastFetchDate.HasValue || now > lastFetchDate + span)
 		{
 			//Console.WriteLine("カレンダー更新するよ 前回更新=" + lastFetchDate);

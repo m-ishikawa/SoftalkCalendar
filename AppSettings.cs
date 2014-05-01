@@ -16,6 +16,8 @@ class Settings
 	public string MorningMeetingTime { get; set; }
 	[Newtonsoft.Json.JsonProperty("morning_meeting_message")]
 	public string MorningMeetingMessage { get; set; }
+	[Newtonsoft.Json.JsonProperty("update_interval")]
+	public string UpdateInterval { get; set; }
 }
 
 class AppSettings

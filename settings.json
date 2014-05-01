@@ -2,6 +2,7 @@
   "settings": {
     "softalk_path": "c:\\softalk\\SofTalk.exe",
 	"morning_meeting_time": "10:11",
-	"morning_meeting_message": "おはようございます。ゆっくりです。。今日の予定です。"
+	"morning_meeting_message": "おはようございます。ゆっくりです。。今日の予定です。",
+	"update_interval": "0:05"
   }
 }
