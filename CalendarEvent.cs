@@ -172,13 +172,13 @@ class CalendarEvent
 				{
 					// 開始時間の判定
 					var dt = item.Start.DateTime.Value;
-					message += dt.Hour + "時" + dt.Hour + "分から、";
+					message += dt.Hour + "時" + dt.Minute + "分から、";
 
 					// 終了時間の判定
 					if (item.End != null)
 					{
 						dt = item.End.DateTime.Value;
-						message += dt.Hour + "時" + dt.Hour + "分まで、";
+						message += dt.Hour + "時" + dt.Minute + "分まで、";
 					}
 				}
 				message += (item.Summary ?? "無題の予定") + "。";
