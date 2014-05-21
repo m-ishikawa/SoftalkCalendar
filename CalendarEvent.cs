@@ -62,7 +62,7 @@ class CalendarEvent
 					// 朝会特殊イベントチェック
 					if (string.IsNullOrEmpty(item.Id))
 					{
-						message += SayMorningMeeting(calendars, item.Summary, now);
+						message += item.Summary + SayMorningMeeting(calendars, now);
 						continue;
 					}
 					else
@@ -146,9 +146,9 @@ class CalendarEvent
 	/// <param name="mes"></param>
 	/// <param name="now"></param>
 	/// <returns></returns>
-	string SayMorningMeeting(IEnumerable<GoogleCalendarAPI.CalendarData> calendars, string mes, DateTime now)
+	string SayMorningMeeting(IEnumerable<GoogleCalendarAPI.CalendarData> calendars, DateTime now)
 	{
-		var message = mes;
+		var message = "";
 
 		foreach (var d in calendars)
 		{
